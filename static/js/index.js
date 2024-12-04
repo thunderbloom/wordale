@@ -1,4 +1,5 @@
-const ans = "APPLE";
+//const ans = "APPLE";
+
 let index = 0; //수정이 가능
 let attempts = 0;
 let timer;
@@ -27,8 +28,12 @@ function appStart() {
     clearInterval(timer);
   };
 
-  const handleEnterKey = () => {
+  const handleEnterKey = async () => {
     let ansCount = 0;
+    //서버에서 정답을 받아오는 코드
+    const reply = await fetch("/answer");
+    const ans = await reply.json(); //javascript object notation
+
     for (let i = 0; i < 5; i++) {
       const block = document.querySelector(
         `.board-column[data-index='${attempts}${i}']`
